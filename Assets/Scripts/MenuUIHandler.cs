@@ -12,7 +12,10 @@ public class MenuUIHandler : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        if (DataManager.Instance != null)
+        {
+            NameInputField.text = DataManager.Instance.PlayerName;
+        }
     }
 
     // Update is called once per frame
