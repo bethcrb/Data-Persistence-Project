@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class MenuUIHandler : MonoBehaviour
 {
+    public InputField NameInputField;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,15 +20,15 @@ public class MenuUIHandler : MonoBehaviour
     {
 
     }
-    
+
     public void StartNew()
     {
+        DataManager.Instance.PlayerName = NameInputField.text;
         SceneManager.LoadScene(1);
     }
 
     public void Quit()
     {
-    //    MainManager.Instance.SaveName();
 
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
@@ -34,4 +36,5 @@ public class MenuUIHandler : MonoBehaviour
         Application.Quit();
 #endif
     }
+    
 }
