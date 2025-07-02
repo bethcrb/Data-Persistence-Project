@@ -52,6 +52,7 @@ public class MainManager : MonoBehaviour
         {
             if (m_Points > DataManager.Instance.BestScore)
             {
+                NameText.text = "Name: " + DataManager.Instance.PlayerName;
                 BestScoreText.text = "Best Score: " + m_Points;
 
                 DataManager.Instance.BestPlayer = DataManager.Instance.PlayerName;
