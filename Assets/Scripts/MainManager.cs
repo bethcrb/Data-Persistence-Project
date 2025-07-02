@@ -12,6 +12,7 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public Text NameText;
+    public Text HighScoreText;
     public GameObject GameOverText;
 
     private bool m_Started = false;
@@ -40,11 +41,22 @@ public class MainManager : MonoBehaviour
         if (DataManager.Instance != null)
         {
             NameText.text = "Name: " + DataManager.Instance.PlayerName;
+            HighScoreText.text = "High Score: " + DataManager.Instance.HighScore;            
         }
     }
 
     private void Update()
     {
+        if (DataManager.Instance != null)
+        {
+            if (m_Points > DataManager.Instance.HighScore)
+            {
+                HighScoreText.text = "High Score: " + m_Points;
+
+                DataManager.Instance.HighScore = m_Points;
+                DataManager.Instance.SavePlayerData();
+            }
+        }
         if (!m_Started)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -65,7 +77,7 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
-        DataManager.Instance.SavePlayerData();
+        
     }
 
     void AddPoint(int point)
