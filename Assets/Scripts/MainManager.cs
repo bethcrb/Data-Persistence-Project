@@ -12,7 +12,7 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public Text NameText;
-    public Text HighScoreText;
+    public Text BestScoreText;
     public GameObject GameOverText;
 
     private bool m_Started = false;
@@ -40,8 +40,9 @@ public class MainManager : MonoBehaviour
 
         if (DataManager.Instance != null)
         {
-            NameText.text = "Name: " + DataManager.Instance.PlayerName;
-            HighScoreText.text = "High Score: " + DataManager.Instance.HighScore;            
+            NameText.text = "Name: " + DataManager.Instance.BestPlayer;
+            BestScoreText.text = "Best Score: " + DataManager.Instance.BestScore;
+            DataManager.Instance.SavePlayerData();
         }
     }
 
@@ -49,11 +50,12 @@ public class MainManager : MonoBehaviour
     {
         if (DataManager.Instance != null)
         {
-            if (m_Points > DataManager.Instance.HighScore)
+            if (m_Points > DataManager.Instance.BestScore)
             {
-                HighScoreText.text = "High Score: " + m_Points;
+                BestScoreText.text = "Best Score: " + m_Points;
 
-                DataManager.Instance.HighScore = m_Points;
+                DataManager.Instance.BestPlayer = DataManager.Instance.PlayerName;
+                DataManager.Instance.BestScore = m_Points;
                 DataManager.Instance.SavePlayerData();
             }
         }

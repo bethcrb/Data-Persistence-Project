@@ -7,7 +7,8 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance;
 
     public string PlayerName;
-    public int HighScore;
+    public string BestPlayer;
+    public int BestScore;
 
     private void Awake()
     {
@@ -27,14 +28,16 @@ public class DataManager : MonoBehaviour
     class SaveData
     {
         public string PlayerName;
-        public int HighScore;
+        public string BestPlayer;
+        public int BestScore;
     }
 
     public void SavePlayerData()
     {
         SaveData data = new SaveData();
         data.PlayerName = PlayerName;
-        data.HighScore = HighScore;
+        data.BestPlayer = BestPlayer;
+        data.BestScore = BestScore;
 
         string json = JsonUtility.ToJson(data);
 
@@ -50,7 +53,8 @@ public class DataManager : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             PlayerName = data.PlayerName;
-            HighScore = data.HighScore;
+            BestPlayer = data.BestPlayer;
+            BestScore = data.BestScore;
         }
     }
 }
